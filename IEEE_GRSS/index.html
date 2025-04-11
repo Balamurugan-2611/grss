@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE GRSS Student Chapter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #0056b3;
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #003d82;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #0056b3;
+            color: #0056b3;
+        }
+
+        .btn-outline:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #0056b3;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #0056b3;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0056b3;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0056b3;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #0056b3;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/placeholder.svg?height=800&width=1600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #0056b3;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .focus-areas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .focus-area {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .focus-area:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .focus-area i {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .focus-area h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 150px;
+            margin: 15px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .mission-vision {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .mission, .vision {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .mission:hover, .vision:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mission h3, .vision h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .project-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #0056b3;
+        }
+
+        .project-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .project-content p {
+            margin-bottom: 20px;
+        }
+
+        /* Events Section */
+        .events {
+            background-color: white;
+        }
+
+        .events-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .event-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #0056b3;
+        }
+
+        .event-date {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .event-location {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .event-time {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .event-details {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+
+        .event-card.expanded .event-details {
+            height: auto;
+            margin-top: 15px;
+        }
+
+        /* Team Section */
+        .team {
+            background-color: #f8f9fa;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .team-member {
+            flex: 1;
+            min-width: 220px;
+            max-width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-img {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #0056b3;
+        }
+
+        .member-role {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .social-links {
+            opacity: 1;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #0056b3;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #003d82;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #003d82;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: white;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            transition: all 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #ccc;
+            padding-left: 5px;
+        }
+
+        .footer-newsletter {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .footer-newsletter h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-newsletter h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: white;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 0 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #004494;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #0056b3;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #0056b3;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-form input,
+        .modal-form textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .modal-form button {
+            margin-top: 10px;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                display: none;
+                transition: all 0.3s ease;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 100px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .mission-vision {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .focus-areas {
+                flex-direction: column;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-form button {
+                border-radius: 5px;
+                padding: 12px;
+            }
+        }
+        #events .container {
+    position: relative;
+    background-image: url('your-image.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    padding: 2rem;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#events .container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: -1;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/grss_logo.png" alt="IEEE GRSS Logo">
+                IEEE GRSS Student Chapter
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="page-4.html">About</a></li>
+                    <li><a href="page-3.html">Events</a></li>
+                    <li><a href="page-2.html">Join</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="page-5.html">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero" style="
+    background-image: url('img/top_bg.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    padding: 80px 0;
+">
+    <div class="container hero-content" style="text-align: center;">
+        <h1>IEEE GRSS Student Chapter</h1>
+        <p>Exploring the Future of Earth, Space, and Science</p>
+        <div class="hero-buttons" style="margin-top: 20px;">
+            <a href="#contact" class="btn" style="
+                background-color: #1b2a4e;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+            ">Join Now</a>
+            <a href="#projects" class="btn btn-outline" style="
+                background-color: transparent;
+                color: white;
+                border: 2px solid #ffffff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin-left: 10px;
+                text-decoration: none;
+                font-weight: bold;
+            ">Explore Projects</a>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About GRSS</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We are the student chapter of IEEE GRSS, focused on geoscience, remote sensing, AI applications, and interdisciplinary student research.</p>
+                    <p>Advancing Earth Observation Technology through innovation, collaboration, and education.</p>
+                </div>
+            </div>
+
+            <div class="focus-areas" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 20px;">
+                <div class="focus-area" style="text-align: center; width: 220px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                    <div style="height: 120px; overflow: hidden;">
+                        <img src="img/sat_img.jpg" alt="Satellite Technology" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 15px;">
+                        <h3>Satellite Technology</h3>
+                        <p>Advanced earth observation and remote sensing</p>
+                    </div>
+                </div>
+            
+                <div class="focus-area" style="text-align: center; width: 220px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                    <div style="height: 120px; overflow: hidden;">
+                        <img src="img/radar_1.jpg" alt="Radar Systems" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 15px;">
+                        <h3>Radar Systems</h3>
+                        <p>Modern radar and microwave sensing</p>
+                    </div>
+                </div>
+            
+                <div class="focus-area" style="text-align: center; width: 220px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                    <div style="height: 120px; overflow: hidden;">
+                        <img src="img/Data-Science.webp" alt="Data Science" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 15px;">
+                        <h3>Data Science</h3>
+                        <p>Big data analytics and AI applications</p>
+                    </div>
+                </div>
+            
+                <div class="focus-area" style="text-align: center; width: 220px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                    <div style="height: 120px; overflow: hidden;">
+                        <img src="img/climate_studies.jpg" alt="Climate Studies" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 15px;">
+                        <h3>Climate Studies</h3>
+                        <p>Environmental monitoring and research</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+            <div class="info-section">
+                <!-- Background image with overlay -->
+                <div class="overlay"></div>
+              
+                <!-- Stats -->
+                <div class="stats-section">
+                  <div class="stat">
+                    <i class="fas fa-project-diagram"></i>
+                    <div class="stat-number counter" data-target="88">0</div>
+                    <div class="stat-label">Projects</div>
+                  </div>
+                  <div class="stat">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number counter" data-target="120">0</div>
+                    <div class="stat-label">Members</div>
+                  </div>
+                  <div class="stat">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="stat-number counter" data-target="45">0</div>
+                    <div class="stat-label">Events</div>
+                  </div>
+                  <div class="stat">
+                    <i class="fas fa-book"></i>
+                    <div class="stat-number counter" data-target="15">0</div>
+                    <div class="stat-label">Publications</div>
+                  </div>
+                </div>
+              
+                <!-- Mission & Vision Cards -->
+                <div class="mission-vision-cards">
+                  <div class="card blue-card">
+                    <h3>Our Mission</h3>
+                    <p>
+                      To foster innovation and excellence in geoscience and remote sensing through collaborative research, knowledge sharing, and professional development.
+                    </p>
+                  </div>
+                  <div class="card blue-card dark">
+                    <h3>Our Vision</h3>
+                    <p>
+                      To be a leading student community in advancing earth observation technologies and their applications for sustainable development.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <style>
+                .info-section {
+                  position: relative;
+                  padding: 60px 20px;
+                  text-align: center;
+                  color: white;
+                  overflow: hidden;
+                  background: #000;
+                }
+              
+                .overlay {
+                  position: absolute;
+                  top: 0; left: 0;
+                  width: 100%; height: 100%;
+                  background: linear-gradient(rgba(0, 0, 30, 0.7), rgba(0, 0, 60, 0.7)), url('img/info_bg.jpg') center/cover no-repeat;
+                  z-index: 0;
+                }
+              
+                .stats-section {
+                  position: relative;
+                  z-index: 1;
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  gap: 40px;
+                  margin-bottom: 60px;
+                }
+              
+                .stat {
+                  display: inline-block;
+                  min-width: 140px;
+                  margin: 30px;
+                }
+              
+                .stat i {
+                  font-size: 2.5rem;
+                  margin-bottom: 15px;
+                  display: block;
+                }
+              
+                .stat-number {
+                  font-size: 3rem;
+                  font-weight: 800;
+                }
+              
+                .stat-label {
+                  font-size: 1.3rem;
+                  font-weight: 700;
+                }
+              
+                .mission-vision-cards {
+                  position: relative;
+                  z-index: 1;
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  gap: 40px;
+                }
+              
+                .blue-card {
+                  width: 320px;
+                  padding: 30px;
+                  border-radius: 20px;
+                  text-align: center;
+                  font-family: 'Segoe UI', sans-serif;
+                  background: linear-gradient(135deg, #1e3c72, #2a5298);
+                  color: #fff;
+                  box-shadow: 0 0 20px rgba(30, 60, 140, 0.4);
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+              
+                .blue-card.dark {
+                  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+                  box-shadow: 0 0 20px rgba(44, 83, 100, 0.4);
+                }
+              
+                .blue-card:hover {
+                  transform: scale(1.05);
+                  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+                }
+              
+                .blue-card h3 {
+                  font-size: 1.6rem;
+                  margin-bottom: 15px;
+                  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+                }
+              
+                .blue-card p {
+                  font-size: 1rem;
+                  line-height: 1.6;
+                  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                }
+              </style>
+              
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+    
+                <div class="project-card">
+                    <div class="project-img" style="background-image: url('img/Satellite.jpg'); height: 200px; background-size: cover; background-position: center;"></div>
+                    <div class="project-content">
+                        <h3>Satellite Image Analysis</h3>
+                        <h4>AI Remote Sensing</h4>
+                        <p>Deep learning applications in satellite imagery for environmental monitoring and urban planning.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+    
+                <div class="project-card">
+                    <div class="project-img" style="background-image: url('img/climate_monitoring.jpg'); height: 200px; background-size: cover; background-position: center;"></div>
+                    <div class="project-content">
+                        <h3>Climate Monitoring</h3>
+                        <h4>GIS Data Science</h4>
+                        <p>Advanced climate pattern detection system using machine learning and geographic information systems.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+    
+                <div class="project-card">
+                    <div class="project-img" style="background-image: url('img/radar.jpg'); height: 200px; background-size: cover; background-position: center;"></div>
+                    <div class="project-content">
+                        <h3>Radar Technology</h3>
+                        <h4>Radar Engineering</h4>
+                        <p>Next-generation radar systems development for improved weather forecasting and disaster management.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container" style="background-image: url('img/upcomming_events.jpg'); background-size: cover; background-position: center; padding: 2rem; border-radius: 1rem;">
+          <h2 class="section-title" style="color: #fff; text-shadow: 1px 1px 3px #000;">Upcoming Events</h2>
+          <div class="events-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div class="event-card glass" data-event-id="1">
+              <h3>Remote Sensing Workshop</h3>
+              <div class="event-date">Mar 15, 2024</div>
+              <div class="event-location">
+                <i class="fas fa-map-marker-alt"></i>
+                Engineering Building, Room 301
+              </div>
+              <div class="event-time">
+                <i class="far fa-clock"></i>
+                2:00 PM - 4:00 PM
+              </div>
+              <a href="#" class="btn btn-outline rsvp-btn" data-event="Remote Sensing Workshop">RSVP</a>
+              <div class="event-details">
+                <p>Join us for a hands-on workshop on remote sensing techniques and applications. Learn from industry experts and gain practical experience with the latest tools and technologies.</p>
+                <p>This workshop is suitable for beginners and intermediate learners interested in remote sensing and geospatial analysis.</p>
+              </div>
+            </div>
+      
+            <div class="event-card glass" data-event-id="2">
+              <h3>AI in Geoscience Seminar</h3>
+              <div class="event-date">Mar 20, 2024</div>
+              <div class="event-location">
+                <i class="fas fa-map-marker-alt"></i>
+                Virtual Event
+              </div>
+              <div class="event-time">
+                <i class="far fa-clock"></i>
+                3:00 PM - 5:00 PM
+              </div>
+              <a href="#" class="btn btn-outline rsvp-btn" data-event="AI in Geoscience Seminar">RSVP</a>
+              <div class="event-details">
+                <p>Explore the intersection of artificial intelligence and geoscience in this informative seminar. Learn about cutting-edge research and applications of AI in earth observation and environmental monitoring.</p>
+                <p>This virtual event will feature presentations from leading researchers and industry professionals.</p>
+              </div>
+            </div>
+      
+            <div class="event-card glass" data-event-id="3">
+              <h3>Annual GRSS Symposium</h3>
+              <div class="event-date">Apr 5, 2024</div>
+              <div class="event-location">
+                <i class="fas fa-map-marker-alt"></i>
+                University Conference Center
+              </div>
+              <div class="event-time">
+                <i class="far fa-clock"></i>
+                9:00 AM - 5:00 PM
+              </div>
+              <a href="#" class="btn btn-outline rsvp-btn" data-event="Annual GRSS Symposium">RSVP</a>
+              <div class="event-details">
+                <p>Our flagship annual event bringing together students, researchers, and industry professionals in the field of geoscience and remote sensing.</p>
+                <p>The symposium will feature keynote speeches, research presentations, poster sessions, and networking opportunities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <style>
+        .glass {
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 1rem;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 1.5rem;
+          color: #fff;
+          text-shadow: 1px 1px 2px #00000080;
+        }
+      
+        .glass h3,
+        .glass .event-date,
+        .glass .event-location,
+        .glass .event-time,
+        .glass .event-details p {
+          color: #fff;
+          text-shadow: 1px 1px 2px #00000080;
+        }
+      
+        .rsvp-btn {
+          display: inline-block;
+          margin-top: 1rem;
+          color: #fff;
+          border-color: #fff;
+          text-shadow: 1px 1px 2px #00000080;
+        }
+      
+        .rsvp-btn:hover {
+          background-color: #fff;
+          color: #000;
+        }
+      </style>
+      
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="img/bala.jpg" alt="Balamurugan">
+                    </div>
+                    <h3 class="member-name">Balamurugan</h3>
+                    <p class="member-role"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">President</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="img/sairam.webp" alt="Sairam">
+                    </div>
+                    <h3 class="member-name">Sairam</h3>
+                    <p class="member-role" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Vice President</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="img/madhan.png" alt="Madhan">
+                    </div>
+                    <h3 class="member-name">Madhan</h3>
+                    <p class="member-role"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Secretary</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="img/safi.jpg" alt="Safiya Bi">
+                    </div>
+                    <h3 class="member-name">Safiya Bi</h3>
+                    <p class="member-role"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Treasurer</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .team {
+    background: linear-gradient(135deg, #1b3b2f, #0b2447); /* greenish navy to dark blue */
+    color: #ffffff;
+    padding: 4rem 2rem;
+}
+
+.team .team-member {
+    background: rgba(158, 157, 157, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.team .team-member:hover {
+    transform: scale(1.05);
+}
+
+.member-name, .member-role {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.social-links a {
+    color: #fff;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #00ffcc;
+}
+
+    </style>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>GRSS</h3>
+                    <p>Advancing Earth observation technology through global collaboration</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Stay updated with our latest news and events.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" title="Submit Newsletter" aria-label="Submit Newsletter"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+                    </form>
+                    <div class="success-message" id="newsletterSuccess">
+                        Thank you for subscribing to our newsletter!
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Global Remote Sensing Society. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3 id="modalTitle">RSVP for Event</h3>
+            <form class="modal-form" id="rsvpForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone Number">
+                <textarea placeholder="Any questions or comments?" rows="3"></textarea>
+                <button type="submit" class="btn">Submit RSVP</button>
+            </form>
+            <div class="success-message" id="rsvpSuccess">
+                Thank you for your RSVP! We look forward to seeing you at the event.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu when clicking on a nav link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Sticky Header
+            const header = document.getElementById('header');
+            let lastScrollTop = 0;
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                } else {
+                    header.style.boxShadow = 'none';
+                    header.style.background = 'white';
+                }
+
+                lastScrollTop = scrollTop;
+            });
+
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('section');
+            
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Animate counters
+            const counters = document.querySelectorAll('.counter');
+            
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        let count = 0;
+                        const updateCounter = () => {
+                            const increment = target / 50;
+                            if (count < target) {
+                                count += increment;
+                                counter.innerText = Math.ceil(count);
+                                setTimeout(updateCounter, 30);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 1 });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // Event Card Expansion
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            eventCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't expand if clicking on RSVP button
+                    if (e.target.classList.contains('rsvp-btn') || e.target.closest('.rsvp-btn')) {
+                        return;
+                    }
+                    
+                    this.classList.toggle('expanded');
+                    const details = this.querySelector('.event-details');
+                    
+                    if (this.classList.contains('expanded')) {
+                        details.style.height = details.scrollHeight + 'px';
+                    } else {
+                        details.style.height = '0';
+                    }
+                });
+            });
+
+            // RSVP Modal
+            const modal = document.getElementById('rsvpModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const rsvpButtons = document.querySelectorAll('.rsvp-btn');
+            const closeModal = document.getElementById('closeModal');
+            const rsvpForm = document.getElementById('rsvpForm');
+            const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+            rsvpButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const eventName = this.getAttribute('data-event');
+                    modalTitle.textContent = `RSVP for ${eventName}`;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                rsvpSuccess.style.display = 'none';
+                rsvpForm.reset();
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    rsvpSuccess.style.display = 'none';
+                    rsvpForm.reset();
+                }
+            });
+
+            rsvpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Simulate form submission
+                setTimeout(function() {
+                    rsvpForm.style.display = 'none';
+                    rsvpSuccess.style.display = 'block';
+                    
+                    // Reset and close after 3 seconds
+                    setTimeout(function() {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        rsvpForm.style.display = 'flex';
+                        rsvpSuccess.style.display = 'none';
+                        rsvpForm.reset();
+                    }, 3000);
+                }, 1000);
+            });
+
+            // Newsletter Form
+            const newsletterForm = document.getElementById('newsletterForm');
+            const newsletterSuccess = document.getElementById('newsletterSuccess');
+
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Simulate form submission
+                setTimeout(function() {
+                    newsletterSuccess.style.display = 'block';
+                    newsletterForm.reset();
+                    
+                    // Hide success message after 3 seconds
+                    setTimeout(function() {
+                        newsletterSuccess.style.display = 'none';
+                    }, 3000);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
